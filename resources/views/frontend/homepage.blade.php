@@ -355,7 +355,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <select class="form-select" id="catOne" aria-label="Default select example">
-                                    @if(!empty(array_reverse($category)))
+                                    @if(!empty($category))
                                         @foreach($category as $c)
                                             <option value="{{ $c->id }}">{{ $c->category_name }}</option>
                                         @endforeach

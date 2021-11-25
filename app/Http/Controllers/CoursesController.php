@@ -14,13 +14,13 @@ class CoursesController extends Controller
     //
     function courses(){
         $courses = Course::paginate(10);
-        return view('frontend.courses.courses', [
+        return view('frontend.courses', [
             "data" => $courses,
         ]);
     }
     function details($id){
         $courses = Course::where("id", $id)->first();
-        return view('frontend.courses.detail', [
+        return view('frontend.courses_detail', [
             "data" => $courses,
         ]);
     }

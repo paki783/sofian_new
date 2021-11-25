@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use url;
 
 class HomeController extends Controller
 {
@@ -12,7 +13,7 @@ class HomeController extends Controller
         $category = Category::where([
             "parent_cat" => 0,
             "type" => "schools"
-        ])->get();
+        ])->latest()->get();
         $sub_cat = [];
         if(!empty($category[0])){
             $sub_cat = Category::where("parent_cat", $category[0]->id)->get();

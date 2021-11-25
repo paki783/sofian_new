@@ -66,6 +66,21 @@ Route::prefix('user')->group(function () {
     Route::get('logout', "UserController@logout");
 });
 
+Route::prefix('dashboard')->group(function () {
+    Route::get('/', "DashboardController@index");
+    Route::get('/purchase_history', "DashboardController@purchase_history");
+});
+
+Route::prefix('forum')->group(function () {
+    Route::get('/', "ForumController@all");
+    Route::get('/add', "ForumController@add");
+
+    Route::post('/create', "ForumController@create");
+    Route::post('/addcomment', "ForumController@addcomment");
+
+    Route::get('/{id}/{title}', "ForumController@details");
+});
+
 Route::prefix('courses')->group(function () {
     Route::get('/', "CoursesController@courses");
     Route::get('/details/{id}', "CoursesController@details");

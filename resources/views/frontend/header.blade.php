@@ -52,8 +52,12 @@
 
                           </ul>
                       </div>
-
-                      <a href="{{ url('login') }}" class="login"><i class="icofont-user"></i> <span>LOG IN</span> </a>
+                        @if(Auth::check())
+                            <a href="{{ URL::to('courses') }}">Courses</a>
+                            <a class="login" href="{{ URL::to('dashboard') }}">Dashboard</a>
+                        @else
+                            <a href="{{ url('login') }}" class="login"><i class="icofont-user"></i> <span>LOG IN</span> </a>
+                        @endif
                       <!-- <a href="signup.html" class="signup"><i class="icofont-users"></i> <span>SIGN UP</span> </a> -->
 
                       <!-- toggle icons -->
