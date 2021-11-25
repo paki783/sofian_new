@@ -57,7 +57,7 @@
                                 <form action="{{ url('forum/addcomment') }}" method="post">
                                     @csrf
                                     <div class="form-group">
-                                        <textarea name="comments" class="form-control"></textarea>
+                                        <textarea name="comments" id="summernote" class="form-control"></textarea>
                                     </div>
                                     <input type="hidden" name="forum_id" value="{{ $data->id }}" />
                                     <input type="submit" value="Add Comment" />

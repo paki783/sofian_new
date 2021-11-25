@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="{{ url('public/assets/css/lightcase.css') }}">
     <link rel="stylesheet" href="{{ url('public/assets/css/style.css') }}">
     <script src="{{ url('public/assets/js/jquery.js') }}"></script>
+    <!-- include summernote css/js -->
+    <link rel="stylesheet" href="{{ URL::to('public/backend/plugins/summernote/summernote-bs4.min.css') }}">
+        <!-- Summernote -->
+        <script src="{{ URL::to('public/backend/plugins/summernote/summernote-bs4.min.js') }}"></script>
     <style>
         .header-wrapper>.menu-area>.menu>ul>li>a {
             padding: 10px !important;
