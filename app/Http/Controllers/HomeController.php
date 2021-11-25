@@ -17,7 +17,7 @@ class HomeController extends Controller
         if(!empty($category[0])){
             $sub_cat = Category::where("parent_cat", $category[0]->id)->get();
         }
-        return view('frontend.home',[
+        return view('frontend.homepage',[
             "body_class" => "home de guest",
             "intro" => true,
             "category" => $category,

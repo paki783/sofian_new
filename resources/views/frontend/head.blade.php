@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ url('public/assets/css/swiper.min.css') }}">
     <link rel="stylesheet" href="{{ url('public/assets/css/lightcase.css') }}">
     <link rel="stylesheet" href="{{ url('public/assets/css/style.css') }}">
+    <script src="{{ url('public/assets/js/jquery.js') }}"></script>
     <style>
         .header-wrapper>.menu-area>.menu>ul>li>a {
             padding: 10px !important;

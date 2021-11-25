@@ -89,10 +89,6 @@
 <!-- Footer Section Ending Here -->
 
 
-
-
-
-<script src="{{ url('public/assets/js/jquery.js') }}"></script>
 <script src="{{ url('public/assets/js/bootstrap.min.js') }}"></script>
 <script src="{{ url('public/assets/js/swiper.min.js') }}"></script>
 <script src="{{ url('public/assets/js/progress.js') }}"></script>

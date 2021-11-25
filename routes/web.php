@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend/homepage');
-});
+Route::get('/', "HomeController@index");
 
 Route::get('/nachhilfe-vor-ort', function () {
     return view('frontend/nachhilfe-vor-ort');

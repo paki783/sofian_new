@@ -352,18 +352,31 @@
                         100% synchron mit dem Lehrplan.
                     </p>
                     <div style="width: 50%; margin:0 auto;"><br>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Abitur</option>
-                            <option value="1">Fachhochschulreife</option>
-                            <option value="2">Mittlerer Schulabschluss</option>
-                            <option value="3">Fachgebundene Hochschulreife</option>
-                        </select><br>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Schulform </option>
-                            <option value="1">Berufliches Gymnasium</option>
-                            <option value="2">Allgemeinbildendes Gymnasium</option>
-                            <option value="3">Berufsoberschule</option>
-                        </select>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <select class="form-select" id="catOne" aria-label="Default select example">
+                                    @if(!empty(array_reverse($category)))
+                                        @foreach($category as $c)
+                                            <option value="{{ $c->id }}">{{ $c->category_name }}</option>
+                                        @endforeach
+                                    @endif
+                                </select><br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" id="subcat_two">
+                                <select class="form-select" aria-label="Default select example">
+                                    @if(!empty($sub_cat))
+                                        @foreach($sub_cat as $c)
+                                            <option value="{{ $c->id }}">{{ $c->category_name }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="col-md-6" id="subcat_three" style="display:none">
+                                <select class="form-select"></select>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -436,7 +449,68 @@
         </div>
     </div>
     <!-- Newsletters Section Ending Here -->
+</div>
+<script>
+    $(document).ready(function(){
+        $("#catOne").change(function(){
+            var cat_id = $(this).val();
+            jQuery.ajax({
+                url : "{{ url('ajax/getCategory') }}",
+                method : "POST",
+                data : {
+                    _token : "{{ csrf_token() }}",
+                    cat_id : cat_id
+                },
+                success : function(res){
+                    //$('#subcat_two select').append($('<option>').val(optionValue).text(optionText))
+                    $('#subcat_two select').html("");
+                    for(var i = 0; i < res.data.length; i++){
+                        $('#subcat_two select').append($('<option>').val(res.data[i].id).text(res.data[i].category_name))
+                    }
+                    if(res.sub_cat.length > 0){
+                        $('#subcat_two').removeClass('col-md-12');
+                        $('#subcat_two').addClass('col-md-6');
+                        $('#subcat_three').show();
+                        $('#subcat_three select').html("");
 
+                        for(var i = 0; i < res.sub_cat.length; i++){
+                            $('#subcat_three select').append($('<option>').val(res.sub_cat[i].id).text(res.sub_cat[i].category_name))
+                        }
+                    }else{
+                        $('#subcat_two').removeClass('col-md-6');
+                        $('#subcat_two').addClass('col-md-12');
+                        $('#subcat_three').hide();
+                        $('#subcat_three select').html("");
+                    }
+                    console.log(res);
+                }
+            });
+        });
+        $('#subcat_two select').change(function(){
+            var cat_id = $(this).val();
+            jQuery.ajax({
+                url : "{{ url('ajax/getCategory') }}",
+                method : "POST",
+                data : {
+                    _token : "{{ csrf_token() }}",
+                    cat_id : cat_id
+                },
+                success : function(res){
+                    if(res.sub_cat.length > 0){
+                        $('#subcat_two').removeClass('col-md-12');
+                        $('#subcat_two').addClass('col-md-6');
+                        $('#subcat_three').show();
+                        $('#subcat_three select').html("");
 
-    </div>
-    @include('frontend.footer')
+                        for(var i = 0; i < res.sub_cat.length; i++){
+                            $('#subcat_three select').append($('<option>').val(res.sub_cat[i].id).text(res.sub_cat[i].category_name))
+                        }
+                    }else{
+
+                    }
+                }
+            });
+        });
+    });
+</script>
+@include('frontend.footer')
